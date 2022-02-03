@@ -1,7 +1,7 @@
 <template>
 <div>
-  <Tutorial />
   <NuxtLink to="/typing">Typing page</NuxtLink>
+  <NuxtLink to="/slide-word">スライドワード</NuxtLink>
 </div>
 </template>
 
