@@ -20,6 +20,8 @@ export default defineNuxtConfig ({
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    // reset.css
+    '~/assets/css/reset'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
