@@ -1,0 +1,83 @@
+@charset "utf-8";
+/* ==========================================================================
+ Base
+========================================================================== */
+$font-size_default: 1.6rem;
+$font-color_default: #333;
+$font-family_default: 'Noto Serif JP';
+$color_base: #fcfcfc;
+
+html,
+body {
+  // サイズ・レイアウト
+  width: 100%;
+  background: $color_base;
+  box-sizing: border-box;
+  // フォント
+  color: $font-color_default;
+  font-size: $font-size_default;
+  font-family: $font-family_default;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  //    letter-spacing: 0.1em;
+}
+
+html {
+  /* デフォルト16px */
+  font-size: 62.5%;
+}
+
+body {
+  /* ルートのフォントサイズを1.6em（16pxと同等のサイズ）に設定 */
+  font-size: $font-size_default;
+}
+
+img {
+  vertical-align: bottom;
+  width: 100%;
+  object-fit: cover;
+}
+
+a,
+button {
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+  transition: 0.3s;
+  color: $font-color_default;
+}
+
+a:hover,
+button:hover {
+  text-decoration: none;
+  transition: 0.3s;
+}
+button {
+  border-style: none;
+  font-size: 1.3rem;
+  &:disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
+}
+
+input,
+textarea,
+select {
+  font-size: $font-size_default;
+  border: none;
+  outline: none; // focus時の枠線を消す
+}
+
+pre {
+  /* Mozilla */
+  // white-space: -moz-pre-wrap;
+  /* Opera 4-6 */
+  // white-space: -pre-wrap;
+  /* Opera 7 */
+  // white-space: -o-pre-wrap;
+  /* CSS3 */
+  white-space: pre-wrap;
+  /* IE 5.5+ */
+  word-wrap: break-word;
+}

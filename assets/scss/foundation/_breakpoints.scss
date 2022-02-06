@@ -1,0 +1,20 @@
+//breakPoint
+$breakpoints: (
+  'sm': 'screen and (min-width: 414px)',
+  'md': 'screen and (min-width: 768px)',
+  //iPad幅
+  'lg': 'screen and (min-width: 960px)',
+  'xl': 'screen and (min-width: 1200px)',
+) !default;
+
+//mixin
+@mixin mq($breakpoint: md) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
+@mixin pc($breakpoint: lg) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
