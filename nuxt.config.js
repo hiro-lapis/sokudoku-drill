@@ -20,6 +20,10 @@ export default defineNuxtConfig ({
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    // reset.css
+    '~/assets/css/reset',
+    '~/assets/scss/_base',
+    '~/assets/scss/_breakpoints',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -33,6 +37,8 @@ export default defineNuxtConfig ({
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     // '@nuxt/typescript-build',
+    // Simple usage
+    '@nuxtjs/eslint-module',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
