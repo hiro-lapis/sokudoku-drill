@@ -1,0 +1,12 @@
+@charset "utf-8";
+/* ==========================================================================
+ Page Common Layout Style
+========================================================================== */
+@import '../foundation/breakpoints';
+
+.l-page {
+  padding: 15px 20px;
+  @include pc() {
+    padding: 30px 40px; // TODO共通化
+  }
+}
