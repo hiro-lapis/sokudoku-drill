@@ -12,7 +12,7 @@
     "lint:js": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
     "lint:style": "stylelint \"**/*.{css,scss,sass,html,vue}\" --ignore-path .gitignore",
     "lint:prettier": "prettier --check .",
-    "lintfix": "prettier --write --list-different . && yarn lint:js --fix && yarn lint:style --fix",
+    "lintfix": "prettier --write --list-different . && yarn lint:js --fix && yarn lint:style --fix"
   },
   "dependencies": {
     "core-js": "^3.19.3",
