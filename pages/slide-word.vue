@@ -8,19 +8,25 @@
       </div>
       <div class="p-form-container">
         <div class="p-form-container__input">
-        <input v-model="count" class="c-input" placeholder="ワード数" max="100" @keyup.enter.exact="change" />
+          <input
+            v-model="count"
+            class="c-input"
+            placeholder="ワード数"
+            max="100"
+            @keyup.enter.exact="change"
+          />
         </div>
-          <button class="c-button" @click="change">チェンジ!</button>
+        <button class="c-button" @click="change">チェンジ!</button>
       </div>
-        <div class="c-word-list__container">
-          <template v-for="(list, index) in wordList">
-            <div :key="index" class="c-word-list">
-              <template v-for="(word, key) in list">
-                <p :key="key" class="c-word">{{ word }}</p>
-              </template>
-            </div>
-          </template>
-        </div>
+      <div class="c-word-list__container">
+        <template v-for="(list, index) in wordList">
+          <div :key="index" class="c-word-list">
+            <template v-for="(word, key) in list">
+              <p :key="key" class="c-word">{{ word }}</p>
+            </template>
+          </div>
+        </template>
+      </div>
     </div>
   </div>
 </template>
@@ -31,22 +37,20 @@ import Vue from 'vue'
 export default Vue.extend({
   // page title
   name: 'SlideWord',
-  data() {
-    return {
-      count: 10,
-      wordList: [],
+  setup() {
+    const wordList = ref([])
+    const count = ref(10)
+    const change = () => {
+      wordList.value = []
+      const num = count.value > 100 ? 100 : count.value
+      for (let i = 0; i < num; i++) {
+        wordList.value.push(shuffle().concat())
+      }
     }
-  },
-  mounted() {
-    this.change()
-  },
+    onMounted(change)
 
-  methods: {
-    change() {
-      this.count = this.count > 100 ? 100 : this.count;
-      this.wordList = []
-
-      const list = [
+    const shuffle = () => {
+      const words = [
         '男は西の山へ',
         '女は東の山へ',
         '男は西の川へ',
@@ -55,19 +59,21 @@ export default Vue.extend({
         '女は東の川へ',
         '女は西の山へ',
       ]
-      for (let index = 0; index < this.count; index++) {
-        this.wordList.push(this.shuffle(list).concat())
-      }
-    },
-    shuffle(list: string[]): string[] {
-      return list.sort(() => 0.5 - Math.random())
-    },
+      return words.sort(() => 0.5 - Math.random())
+    }
+
+    return {
+      wordList,
+      count,
+      change,
+      shuffle,
+    }
   },
 })
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/foundation/_breakpoints.scss";
+@import '../assets/scss/foundation/_breakpoints.scss';
 
 .p-slide-word {
   &__head {
@@ -101,8 +107,8 @@ export default Vue.extend({
 .c-title {
   font-size: 30px;
   position: relative;
-	padding-top: 30px;
-	border-bottom: 1px solid rgba(5,62,98,1);
+  padding-top: 30px;
+  border-bottom: 1px solid rgba(5, 62, 98, 1);
   span {
     position: relative;
     z-index: 2;
@@ -112,7 +118,7 @@ export default Vue.extend({
     position: absolute;
     top: 0px;
     left: 0;
-    color: rgba(5,62,98,0.2);
+    color: rgba(5, 62, 98, 0.2);
     font-size: 40px;
     text-transform: uppercase;
     z-index: 1;
