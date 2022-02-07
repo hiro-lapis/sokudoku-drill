@@ -32,9 +32,9 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { onMounted,ref } from '@vue/composition-api';
 
-export default Vue.extend({
+export default {
   // page title
   name: 'SlideWord',
   setup() {
@@ -69,7 +69,7 @@ export default Vue.extend({
       shuffle,
     }
   },
-})
+}
 </script>
 
 <style lang="scss" scoped>
