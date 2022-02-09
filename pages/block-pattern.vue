@@ -138,10 +138,16 @@ export default {
 .c-word-list {
   display: flex;
   flex-direction: row;
-  margin-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 50px;
   width: 300px;
   flex-wrap: wrap;
+  @include pc() {
+    margin-left: 0;
+    margin-right: 20px;
+  }
+
   &__container {
     display: flex;
     flex-wrap: wrap;
@@ -171,7 +177,7 @@ export default {
     z-index: 1;
   }
 }
-.c-input {
+.c-select {
   padding: 5px 10px;
   box-sizing: border-box;
   // height: 48px;
