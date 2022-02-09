@@ -90,3 +90,4 @@ sw.*
 *.swp
 # Nitro Foler
 .output
+.vscode
