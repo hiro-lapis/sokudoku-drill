@@ -8,6 +8,7 @@
         <div class="p-form-container__input">
           <input
             v-model="count"
+            type="number"
             class="c-input"
             placeholder="ワード数"
             max="100"
