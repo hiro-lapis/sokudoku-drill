@@ -16,7 +16,7 @@
             @keyup.enter.exact="change"
           />
         </div>
-        <button class="c-button" @click="change">チェンジ!</button>
+        <submit-button title="チェンジ!" @click-event="change" />
       </div>
       <div class="c-word-list__container">
         <template v-for="(list, index) in wordList">

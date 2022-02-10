@@ -16,7 +16,7 @@
           </select>
 
         </div>
-        <button class="c-button" @click="change">チェンジ!</button>
+        <submit-button title="チェンジ!" @click-event="change" />
       </div>
       <div class="c-word-list__container">
         <template v-for="(list, index) in displayWordList">
@@ -107,11 +107,16 @@ export default {
       return words.sort(() => 0.5 - Math.random())
     }
 
+    const hoge = () => {
+      alert('hoge~');
+    }
+
     return {
       wordList,
       mode,
       displayWordList,
       change,
+      hoge,
     }
   },
 }
