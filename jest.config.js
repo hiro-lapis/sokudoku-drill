@@ -16,4 +16,6 @@ module.exports = {
     '<rootDir>/pages/**/*.vue',
   ],
   testEnvironment: 'jsdom',
+  // テスト対象から除外
+  testPathIgnorePatterns: ["/node_modules/", '.idea'],
 }

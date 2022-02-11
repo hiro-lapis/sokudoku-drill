@@ -2,21 +2,20 @@
   <div class="l-page">
     <div class="p-slide-word">
       <div class="p-slide-word__head">
-        <h1 class="c-title" data-en="slide word">
-          <span>スライドワード</span>
-        </h1>
+        <page-title title="スライドワード" background-title="slide word" />
       </div>
       <div class="p-form-container">
         <div class="p-form-container__input">
           <input
             v-model="count"
+            type="number"
             class="c-input"
             placeholder="ワード数"
             max="100"
             @keyup.enter.exact="change"
           />
         </div>
-        <button class="c-button" @click="change">チェンジ!</button>
+        <submit-button title="チェンジ!" @click-event="change" />
       </div>
       <div class="c-word-list__container">
         <template v-for="(list, index) in wordList">
@@ -104,26 +103,6 @@ export default {
 .c-word {
   margin-bottom: 10px;
 }
-.c-title {
-  font-size: 30px;
-  position: relative;
-  padding-top: 30px;
-  border-bottom: 1px solid rgba(5, 62, 98, 1);
-  span {
-    position: relative;
-    z-index: 2;
-  }
-  &::before {
-    content: attr(data-en);
-    position: absolute;
-    top: 0px;
-    left: 0;
-    color: rgba(5, 62, 98, 0.2);
-    font-size: 40px;
-    text-transform: uppercase;
-    z-index: 1;
-  }
-}
 .c-input {
   padding: 5px 10px;
   box-sizing: border-box;
@@ -132,12 +111,5 @@ export default {
   border-radius: 5px;
   font-size: 16px;
   width: 100%;
-}
-.c-button {
-  display: inline-block;
-  text-align: center;
-  box-sizing: border-box;
-  width: 150px;
-  padding: 5px 10px;
 }
 </style>

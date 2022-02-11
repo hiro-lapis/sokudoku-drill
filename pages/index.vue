@@ -1,6 +1,7 @@
 <template>
   <div>
     <NuxtLink to="/slide-word">スライドワード</NuxtLink>
+    <NuxtLink to="/block-pattern">ブロックパターン</NuxtLink>
   </div>
 </template>
 
