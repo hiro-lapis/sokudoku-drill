@@ -20,7 +20,7 @@
         <template v-for="(list, index) in displayWordList">
           <div :key="index" class="c-word-list">
             <template v-for="(word, key) in list">
-              <p :key="key" class="c-word">{{ word }}</p>
+              <p :key="key" class="c-word" :class="{ 'u-margin-right-1p': isKanjiMode }">{{ word }}</p>
             </template>
           </div>
         </template>
@@ -79,7 +79,56 @@ const wordList = [
       'を',
       'ん',
   ]},
-  { key: 1, name: '漢字', words: []}
+  { key: 1, name: '漢字',
+  words: [
+    '北海道',
+    '青森',
+    '岩手',
+    '宮城',
+    '秋田',
+    '山形',
+    '福島',
+    '茨城',
+    '栃木',
+    '群馬',
+    '埼玉',
+    '千葉',
+    '東京',
+    '神奈川',
+    '新潟',
+    '富山',
+    '石川',
+    '福井',
+    '山梨',
+    '長野',
+    '岐阜',
+    '静岡',
+    '愛知',
+    '三重',
+    '滋賀',
+    '京都',
+    '大阪',
+    '兵庫',
+    '奈良',
+    '和歌山',
+    '鳥取',
+    '島根',
+    '岡山',
+    '広島',
+    '山口',
+    '徳島',
+    '香川',
+    '愛媛',
+    '高知',
+    '福岡',
+    '佐賀',
+    '長崎',
+    '熊本',
+    '大分',
+    '宮崎',
+    '鹿児島',
+    '沖縄',
+  ]}
 ];
 
 export default {
@@ -88,8 +137,12 @@ export default {
   setup() {
     const displayWordList = ref([])
     const mode = ref(0)
+    const isKanjiMode = ref(false)
 
     const change = () => {
+      // 漢字モード切り替えフラグ更新
+      isKanjiMode.value = mode.value === 1;
+
       // 初期化
       displayWordList.value = []
       // 選択したモードに応じたワード原本を取得
@@ -105,16 +158,13 @@ export default {
       return words.sort(() => 0.5 - Math.random())
     }
 
-    const hoge = () => {
-      alert('hoge~');
-    }
 
     return {
       wordList,
       mode,
       displayWordList,
       change,
-      hoge,
+      isKanjiMode,
     }
   },
 }
@@ -159,6 +209,9 @@ export default {
 }
 .c-word {
   margin-bottom: 10px;
+}
+.u-margin-right-1p {
+  margin-right: 10px;
 }
 .c-select {
   padding: 5px 10px;
