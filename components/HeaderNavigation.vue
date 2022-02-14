@@ -38,6 +38,7 @@ export default {
 
 .c-header {
   display: flex;
+  flex-direction: column;
   align-items: center;
   box-sizing: border-box;
   width: 100%;
@@ -45,22 +46,26 @@ export default {
   position: relative;
   @include pc() {
     padding: 20px 40px;
+    height: 100px;
   }
   &__logo {
     margin: auto;
     @include pc() {
-      margin: 0;
+      margin-bottom: 30px;
     }
   }
   &__menu {
     display: none;
     @include pc() {
       display: inline-block;
+      width: 100%;
     }
   }
 }
-
 .c-nav__unorder-list {
   display: flex;
+}
+.c-nav__list {
+  margin-right: 15px;
 }
 </style>
