@@ -25,6 +25,7 @@ export default defineNuxtConfig({
     '~/assets/scss/foundation/_breakpoints',
     '~/assets/scss/layout/_wrapper',
     '~/assets/scss/layout/_page',
+    '~/assets/scss/layout/_nuxt_common',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

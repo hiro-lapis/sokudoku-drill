@@ -1,0 +1,13 @@
+@charset "utf-8";
+/* ==========================================================================
+ Nuxt Common Style
+========================================================================== */
+@import '../foundation/breakpoints';
+
+.nuxt-link-exact-active {
+  font-weight: bold;
+  transition: all 0.5s;
+  &:hover {
+    transition: all 0.5s;
+  }
+}
