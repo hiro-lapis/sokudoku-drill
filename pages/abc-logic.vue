@@ -6,9 +6,9 @@
       </div>
       <div class="p-form-container">
         <div class="p-form-container__input">
-          <select v-model="mode" class="c-select">
+          <select v-model="quizLevelList" class="c-select">
           <option
-                v-for="(item, index) in wordList"
+                v-for="(item, index) in quizLevelList"
                 :key="index"
                 :value="item.key">{{item.name}}</option>
           </select>
@@ -31,17 +31,32 @@
 
 <script lang="ts">
 import { onMounted,ref } from '@vue/composition-api';
+import { useMakeABCQuiz } from '~/composables/useMakeABCQuiz';
 
-const elementList = ['A', 'B', 'C'];
+const quizCount = 30;
+const quizLevelList = [
+  { key: 0, name: 'かんたん'},
+  { key: 1, name: 'ふつう'},
+  { key: 2, name: 'むずかしい'},
+];
 export default {
   name: 'ABC Logic',
   setup() {
-    // ロジック要素シャッフル
-    // 問題文作成メソッドにロジック要素の配列を渡す
-    // key(問題No)/問題文/回答を生成し返却
-    // 画面表示用のdataにpush
-    // 30回ループ
-    // onMountedでの実行処理追加
+    const quizLevel = ref(0)
+    const quizList = ref([])
+
+    const makeQuizList = () => {
+      quizList = [];
+      for (let index = 0; index < quizCount; index++) {
+        const { worstFlag, unclearFlag } = useGetQuizFlag(quizLevel.value);
+        quizList.value.push(useMakeABCQuiz(worstFlag, unclearFlag))
+      }
+    }
+    onMounted(makeQuizList)
+    return {
+      quizLevelList,
+      quizList,
+    }
   }
 }
 
