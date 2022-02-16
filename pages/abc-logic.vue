@@ -14,7 +14,7 @@
           </select>
 
         </div>
-        <submit-button title="チェンジ!" @click-event="change" />
+        <submit-button title="チェンジ!" @click-event="makeQuizList" />
       </div>
       <div class="c-abc-logic__container">
         <!-- ループレンダリング -->
@@ -31,7 +31,8 @@
 
 <script lang="ts">
 import { onMounted,ref } from '@vue/composition-api';
-import { useMakeABCQuiz } from '~/composables/useMakeABCQuiz';
+import { useGetQuizFlag } from '~/composables/useGetQuizFlag';
+// import { useMakeABCQuiz } from '~/composables/useMakeABCQuiz';
 
 const quizCount = 30;
 const quizLevelList = [
@@ -46,16 +47,19 @@ export default {
     const quizList = ref([])
 
     const makeQuizList = () => {
-      quizList = [];
+      quizList.value = [];
       for (let index = 0; index < quizCount; index++) {
         const { worstFlag, unclearFlag } = useGetQuizFlag(quizLevel.value);
-        quizList.value.push(useMakeABCQuiz(worstFlag, unclearFlag))
+        console.log(worstFlag)
+        console.log(unclearFlag)
+        // quizList.value.push(useMakeABCQuiz(worstFlag, unclearFlag))
       }
     }
     onMounted(makeQuizList)
     return {
       quizLevelList,
       quizList,
+      makeQuizList,
     }
   }
 }
