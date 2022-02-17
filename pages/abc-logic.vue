@@ -1,7 +1,7 @@
 <template>
   <div class="l-page">
-    <div class="p-block-pattern">
-      <div class="p-block-pattern__head">
+    <div class="p-abc-logic">
+      <div class="p-abc-logic__head">
         <page-title title="ABCロジック" background-title="ABC logic" />
       </div>
       <div class="p-form-container">
@@ -32,9 +32,10 @@
 
         <!-- 問題No:正解-->
       </div>
-      <div class="c-answer-list">
+      <div class="p-abc-logic__bottom">
+        <h2 class="c-sub-title">答え</h2>
         <template v-for="(quiz, index) in quizList">
-          <div :key="index">
+          <div :key="index" class="c-quiz-answer-word">
             <span>{{ (index + 1) }}:{{ quiz.answer }}</span>
           </div>
         </template>
@@ -91,9 +92,13 @@ export default {
 <style lang="scss" scoped>
 @import '../assets/scss/foundation/_breakpoints.scss';
 
-.p-block-pattern {
+.p-abc-logic {
   &__head {
     margin-bottom: 30px;
+  }
+  &__bottom {
+    display: flex;
+    flex-wrap: wrap;
   }
   @include pc() {
   }
@@ -106,30 +111,14 @@ export default {
   }
 }
 
-.abc-logic {
-  display: flex;
-  flex-direction: row;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 50px;
-  width: 300px;
-  flex-wrap: wrap;
-  @include pc() {
-    margin-left: 0;
-    margin-right: 20px;
-  }
-
-  &__container {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 980px;
-  }
-}
-.c-word {
-  margin-bottom: 10px;
-}
-.u-margin-right-1p {
+.c-quiz-answer-word {
   margin-right: 10px;
+  margin-bottom: 8px;
+}
+.c-sub-title {
+  font-size: 20px;
+  display: block;
+  width: 100%;
 }
 .c-select {
   padding: 5px 10px;
