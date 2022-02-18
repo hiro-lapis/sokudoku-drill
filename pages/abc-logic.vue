@@ -17,21 +17,18 @@
         <submit-button title="チェンジ!" @click-event="makeQuizList" />
       </div>
       <div class="c-abc-logic__container">
-        <!-- ループレンダリング -->
+        <!-- 出題 -->
         <template v-for="(quiz, index) in quizList">
-        <div :key="index">
-          <div>
-            <span>{{ (index + 1) }}</span>
-            <span>{{ quiz.sentense1 }}</span>
-            <span>{{ quiz.sentense2 }}</span>
+          <div :key="index">
+            <div>
+              <span>{{ (index + 1) }}</span>
+              <span>{{ quiz.sentense1 }}</span>
+              <span>{{ quiz.sentense2 }}</span>
+            </div>
           </div>
-        </div>
         </template>
-
-
-
-        <!-- 問題No:正解-->
       </div>
+      <!-- 回答 -->
       <div class="p-abc-logic__bottom">
         <h2 class="c-sub-title">答え</h2>
         <template v-for="(quiz, index) in quizList">
