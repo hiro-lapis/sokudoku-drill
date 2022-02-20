@@ -22,8 +22,8 @@
           <div :key="index">
             <div>
               <span>{{ (index + 1) }}</span>
-              <span>{{ quiz.sentense1 }}</span>
-              <span>{{ quiz.sentense2 }}</span>
+              <span>{{ quiz.hint1 }}</span>
+              <span>{{ quiz.hint2 }}</span>
             </div>
           </div>
         </template>
@@ -53,12 +53,12 @@ const quizLevelList = [
   { key: 2, name: 'むずかしい'},
 ];
 const fakeData = [
-  { sentense1: 'AはBより高い', sentense2: 'AはCより高い', question: '一番高いのは?', answer: 'A'},
-  { sentense1: 'BはCより高い', sentense2: 'AはCより高い', question: '一番高いのは?', answer: 'B'},
-  { sentense1: 'AはBより遅い', sentense2: 'AはCより遅い', question: '一番速いのは?', answer: 'C'},
-  { sentense1: 'AはBより高い', sentense2: 'AはCより高い', question: '一番高いのは?', answer: 'A'},
-  { sentense1: 'BはCより高い', sentense2: 'AはCより高い', question: '一番高いのは?', answer: 'B'},
-  { sentense1: 'AはBより遅い', sentense2: 'AはCより遅い', question: '一番速いのは?', answer: 'C'},
+  { hint1: 'AはBより高い', hint2: 'AはCより高い', question: '一番高いのは?', answer: 'A'},
+  { hint1: 'BはCより高い', hint2: 'AはCより高い', question: '一番高いのは?', answer: 'B'},
+  { hint1: 'AはBより遅い', hint2: 'AはCより遅い', question: '一番速いのは?', answer: 'C'},
+  { hint1: 'AはBより高い', hint2: 'AはCより高い', question: '一番高いのは?', answer: 'A'},
+  { hint1: 'BはCより高い', hint2: 'AはCより高い', question: '一番高いのは?', answer: 'B'},
+  { hint1: 'AはBより遅い', hint2: 'AはCより遅い', question: '一番速いのは?', answer: 'C'},
 ];
 export default {
   name: 'ABC Logic',
@@ -72,8 +72,10 @@ export default {
         const { worstFlag, unclearFlag } = useGetQuizFlag(quizLevel.value);
         console.log(worstFlag)
         console.log(unclearFlag)
-        // quizList.value.push(useMakeABCQuiz(worstFlag, unclearFlag))
-        quizList.value.push(...fakeData)
+        console.log(fakeData)
+        quizList.value.push(useMakeABCQuiz(worstFlag, unclearFlag))
+        // quizList.value.push(...fakeData)
+
       }
     }
     onMounted(makeQuizList)
