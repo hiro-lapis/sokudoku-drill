@@ -3,10 +3,9 @@ import { shuffle } from "./shuffle";
 /**
  * @param boolean worstFlag 最も低い・短い・小さい回答問題作成フラグ
  * @param boolean unclearFlag 回答が[不明]になる問題作成フラグ
- * @return array sentences ヒント文
- * @return stringanswer  答え
+ * @return Quiz
  */
-export const useMakeABCQuiz = (worstFlag: boolean, unclearFlag: boolean) => {
+export const useMakeABCQuiz = (worstFlag: boolean, unclearFlag: boolean): Quiz => {
   /**
    * 要素をシャッフルした配列を取得
    */
@@ -55,7 +54,7 @@ export const useMakeABCQuiz = (worstFlag: boolean, unclearFlag: boolean) => {
     // ヒント文で上位比較ワードを使用するかどうかのフラグ
     let isHighExp = getRandomBool()
     // ヒント文1で使用する要素を決定
-    let [element1, element2] = getElementForHint();
+    const [element1, element2] = getElementForHint()
     const value1 = list.indexOf(element1)
     const value2 = list.indexOf(element2)
     let hint1: string;
@@ -69,7 +68,7 @@ export const useMakeABCQuiz = (worstFlag: boolean, unclearFlag: boolean) => {
     // ヒント文2の作成
     isHighExp = getRandomBool()
     // ヒント文1で使われてない要素はヒント文2で使用必須にする
-    const required = list.find(element => element != element1 || element2) !
+    const required = list.find(element => element !== element1 || element2) !
     const [element3, element4] = getElementForHint(required)
     const value3 = list.indexOf(element3)
     const value4 = list.indexOf(element4)
@@ -81,7 +80,6 @@ export const useMakeABCQuiz = (worstFlag: boolean, unclearFlag: boolean) => {
     } else {
       hint2 = (value3 < value4 ? element3 : element4) + 'は' + (value3 < value4 ? element4 : element3) + 'より' + expression.low
     }
-
     return new Quiz(
       hint1,
       hint2,
@@ -132,8 +130,8 @@ export const useMakeABCQuiz = (worstFlag: boolean, unclearFlag: boolean) => {
 
 class Quiz {
     // property
-    hint1: String
-    hint2: String
+    public hint1: String
+    private hint2: String
     question: String
     answer: String
 
