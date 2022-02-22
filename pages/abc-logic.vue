@@ -24,6 +24,7 @@
               <span>{{ (index + 1) }}</span>
               <span>{{ quiz.hint1 }}</span>
               <span>{{ quiz.hint2 }}</span>
+              <span>{{ quiz.question }}</span>
             </div>
           </div>
         </template>
@@ -44,38 +45,46 @@
 <script lang="ts">
 import { onMounted,ref } from '@vue/composition-api';
 import { useGetQuizFlag } from '~/composables/useGetQuizFlag';
-// import { useMakeABCQuiz } from '~/composables/useMakeABCQuiz';
+import { useMakeABCQuiz } from '~/composables/useMakeABCQuiz';
 
-const quizCount = 5;
+const quizCount = 30;
 const quizLevelList = [
   { key: 0, name: 'かんたん'},
   { key: 1, name: 'ふつう'},
   { key: 2, name: 'むずかしい'},
 ];
-const fakeData = [
-  { hint1: 'AはBより高い', hint2: 'AはCより高い', question: '一番高いのは?', answer: 'A'},
-  { hint1: 'BはCより高い', hint2: 'AはCより高い', question: '一番高いのは?', answer: 'B'},
-  { hint1: 'AはBより遅い', hint2: 'AはCより遅い', question: '一番速いのは?', answer: 'C'},
-  { hint1: 'AはBより高い', hint2: 'AはCより高い', question: '一番高いのは?', answer: 'A'},
-  { hint1: 'BはCより高い', hint2: 'AはCより高い', question: '一番高いのは?', answer: 'B'},
-  { hint1: 'AはBより遅い', hint2: 'AはCより遅い', question: '一番速いのは?', answer: 'C'},
-];
 export default {
   name: 'ABC Logic',
   setup() {
+    // TODO:型定義ファイルへ移動
+    class Quiz {
+      // property
+      public hint1: String
+      private hint2: String
+      question: String
+      answer: String
+
+      constructor(
+        hint1: String,
+        hint2: String,
+        question: String,
+        answer: String
+      ) {
+        this.hint1 = hint1
+        this.hint2 = hint2
+        this.question = question
+        this.answer = answer
+      }
+    }
     const quizLevel = ref(0)
-    const quizList = ref([])
+    const quizList = ref<Quiz[]>([])
+
 
     const makeQuizList = () => {
       quizList.value = [];
       for (let index = 0; index < quizCount; index++) {
         const { worstFlag, unclearFlag } = useGetQuizFlag(quizLevel.value);
-        console.log(worstFlag)
-        console.log(unclearFlag)
-        console.log(fakeData)
         quizList.value.push(useMakeABCQuiz(worstFlag, unclearFlag))
-        // quizList.value.push(...fakeData)
-
       }
     }
     onMounted(makeQuizList)
