@@ -84,7 +84,8 @@ export const useMakeABCQuiz = (worstFlag: boolean, unclearFlag: boolean): Quiz =
       hint1,
       hint2,
       question,
-      answer
+      answer,
+      list
     )
   }
 
@@ -134,17 +135,20 @@ class Quiz {
     private hint2: String
     question: String
     answer: String
+    orderList: string[]
 
     constructor(
     hint1: String,
     hint2: String,
     question: String,
-    answer: String
+    answer: String,
+    orderList: string[],
   ) {
     this.hint1 = hint1
     this.hint2 = hint2
     this.question = question
     this.answer = answer
+    this.orderList = orderList
   }
 }
 

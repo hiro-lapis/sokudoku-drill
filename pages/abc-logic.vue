@@ -58,22 +58,25 @@ export default {
   setup() {
     // TODO:型定義ファイルへ移動
     class Quiz {
-      // property
-      public hint1: String
-      private hint2: String
-      question: String
-      answer: String
+        // property
+        public hint1: String
+        private hint2: String
+        question: String
+        answer: String
+        orderList: string[]
 
-      constructor(
+        constructor(
         hint1: String,
         hint2: String,
         question: String,
-        answer: String
+        answer: String,
+        orderList: string[],
       ) {
         this.hint1 = hint1
         this.hint2 = hint2
         this.question = question
         this.answer = answer
+        this.orderList = orderList
       }
     }
     const quizLevel = ref(0)
