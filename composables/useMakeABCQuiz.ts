@@ -22,7 +22,7 @@ export const useMakeABCQuiz = (worstFlag: boolean, unclearFlag: boolean): Quiz =
     const elementList = shuffle(['A', 'B', 'C']);
     if (required === undefined) {
       // 末尾の要素を削除
-      elementList.pop()
+      elementList.pop() !
       return [...elementList]
     }
     // 引数以外の要素をランダムに1つ取得(undefinedが入らないよう型指定)
@@ -30,52 +30,80 @@ export const useMakeABCQuiz = (worstFlag: boolean, unclearFlag: boolean): Quiz =
     // 引数と合わせ配列をシャッフルして返却
     return [...shuffle([required, filtered])]
   }
-  /**
-   * 0~maxの範囲でランダムに整数を取得
-   */
+  // /**
+  //  * 0~maxの範囲でランダムに整数を取得
+  //  */
   const getRandomInt = (max: number): number => {
     return Math.floor(Math.random() * max)
   }
-  /**
-   * ランダムに真偽値取得
-   */
+  // /**
+  //  * ランダムに真偽値取得
+  //  */
   const getRandomBool = (): boolean => {
     return Math.random() < 0.5
   }
+  /**
+   * 問題構成から解なしになるクイズかどうかを判定
+   */
+  const isClearQuiz = (questionIsHigh: boolean, value1: Number, value2: Number, value3: Number, value4: Number): boolean => {
+    // ヒント文1・2両方で使われている値を取得
+    const duplicateValue = [value1, value2, value3, value4].find((value, _, self) => self.indexOf(value) !== self.lastIndexOf(value)) !
+
+    // 中央の値が2度使われている時は全順序が分かる
+    if (duplicateValue === 1) {
+      return true
+    }
+    // 最上値を問う問題では,最上値が2度使われているかどうか
+    if (questionIsHigh) {
+      return duplicateValue === 2
+    }
+    // 最下値を問う問題では,最下値が2度使われているかどうか
+    return duplicateValue === 0
+  }
+
   /** かんたん(最上を問い回答が明確)なクイズを作成 */
   const makeEasyQuiz = (list: string[]): Quiz => {
     // 回答を最初の要素に設定(答えが最下を問うものでも共通)
-    const answer = list[0]
+    const answer = list[2]
     // ヒント問いで使用する比較表現
     const expression =  expressionList[getRandomInt(expressionList.length)]
     // 最上を問うクイズとして定義
     const question = '一番'+ expression.high + 'のは?'
 
     // ヒント文で上位比較ワードを使用するかどうかのフラグ
-    let isHighExp = getRandomBool()
+    const isHighExp1 = getRandomBool()
     // ヒント文1で使用する要素を決定
     const [element1, element2] = getElementForHint()
     const value1 = list.indexOf(element1)
     const value2 = list.indexOf(element2)
-    let hint1: string;
+    let hint1: string
     // 要素のkey数を基準に優劣を比較
-    if (isHighExp) {
+    if (isHighExp1) {
       hint1 = (value1 > value2 ? element1 : element2) + 'は' + (value1 > value2 ? element2 : element1) + 'より' + expression.high
     } else {
       hint1 = (value1 < value2 ? element1 : element2) + 'は' + (value1 < value2 ? element2 : element1) + 'より' + expression.low
     }
 
     // ヒント文2の作成
-    isHighExp = getRandomBool()
-    // ヒント文1で使われてない要素はヒント文2で使用必須にする
-    const required = list.find(element => element !== element1 || element2) !
-    const [element3, element4] = getElementForHint(required)
-    const value3 = list.indexOf(element3)
-    const value4 = list.indexOf(element4)
-    let hint2: string;
+    const isHighExp2 = getRandomBool()
+    // ヒント文1で使われてない要素はヒント文2で使用必須化
+    const required = list.find(element => element !== element1 && element !==  element2) !
+    let [element3, element4] = getElementForHint(required)
+    let value3 = list.indexOf(element3)
+    let value4 = list.indexOf(element4)
+
+    // 必ず回答が出せるロジックになるよう修正
+    let isClear = isClearQuiz(true, value1, value2, value3, value4)
+    while (isClear === false) {
+      [element3, element4] = getElementForHint(required)
+      value3 = list.indexOf(element3)
+      value4 = list.indexOf(element4)
+      isClear = isClearQuiz(true, value1, value2, value3, value4)
+    }
+
     // 要素のkey数を基準に優劣を比較
-    // TODO:必ず回答が出せるロジックになるよう修正
-    if (isHighExp) {
+    let hint2: string
+    if (isHighExp2) {
       hint2 = (value3 > value4 ? element3 : element4) + 'は' + (value3 > value4 ? element4 : element3) + 'より' + expression.high
     } else {
       hint2 = (value3 < value4 ? element3 : element4) + 'は' + (value3 < value4 ? element4 : element3) + 'より' + expression.low
@@ -154,8 +182,8 @@ class Quiz {
 
 const expressionList: readonly {high: string, low: string}[] = [
   { high: '高い', low: '低い'},
-  { high: '遅い', low: '速い'},
+  { high: '速い', low: '遅い'},
   { high: '大きい', low: '小さい'},
-  { high: '短い', low: '長い'},
+  { high: '長い', low: '短い'},
   { high: '重い', low: '軽い'},
 ];
