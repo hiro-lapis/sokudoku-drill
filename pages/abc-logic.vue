@@ -12,31 +12,32 @@
                 :key="index"
                 :value="item.key">{{item.name}}</option>
           </select>
-
         </div>
         <submit-button title="チェンジ!" @click-event="makeQuizList" />
       </div>
-      <div class="c-abc-logic__container">
-        <!-- 出題 -->
+      <div class="p-abc-logic__body">
+        <!-- クイズ -->
         <template v-for="(quiz, index) in quizList">
           <div :key="index">
-            <div>
-              <span>{{ (index + 1) }}</span>
-              <span>{{ quiz.hint1 }}</span>
-              <span>{{ quiz.hint2 }}</span>
-              <span>{{ quiz.question }}</span>
+            <div class="c-quiz">
+              <span class="c-quiz__label">{{ (index + 1) }}</span>
+              <div class="c-quiz__body">
+                <span class="c-quiz__hint1">{{ quiz.hint1 }}</span>
+                <span class="c-quiz__hint2">{{ quiz.hint2 }}</span>
+                <span class="c-quiz__question">{{ quiz.question }}</span>
+              </div>
             </div>
           </div>
         </template>
       </div>
       <!-- 回答 -->
       <div class="p-abc-logic__bottom">
-        <h2 class="c-sub-title">答え</h2>
-        <template v-for="(quiz, index) in quizList">
-          <div :key="index" class="c-quiz-answer-word">
-            <span>{{ (index + 1) }}:{{ quiz.answer }}</span>
-          </div>
-        </template>
+        <h2 @click="display = !display">答え</h2>
+          <template v-for="(quiz, index) in quizList">
+            <div :key="index" class="c-quiz-answer-word" :class="[display ? 'answer--display' : 'answer--hidden' ]">
+              <span>{{ (index + 1) }}:{{ quiz.answer }}</span>
+            </div>
+          </template>
       </div>
     </div>
   </div>
@@ -46,6 +47,7 @@
 import { onMounted,ref } from '@vue/composition-api';
 import { useGetQuizFlag } from '~/composables/useGetQuizFlag';
 import { useMakeABCQuiz } from '~/composables/useMakeABCQuiz';
+import Quiz from '~/modules/Quiz';
 
 const quizCount = 30;
 const quizLevelList = [
@@ -54,34 +56,11 @@ const quizLevelList = [
   { key: 2, name: 'むずかしい'},
 ];
 export default {
-  name: 'ABC Logic',
+  name: 'ABCLogic',
   setup() {
-    // TODO:型定義ファイルへ移動
-    class Quiz {
-        // property
-        public hint1: String
-        private hint2: String
-        question: String
-        answer: String
-        orderList: string[]
-
-        constructor(
-        hint1: String,
-        hint2: String,
-        question: String,
-        answer: String,
-        orderList: string[],
-      ) {
-        this.hint1 = hint1
-        this.hint2 = hint2
-        this.question = question
-        this.answer = answer
-        this.orderList = orderList
-      }
-    }
     const quizLevel = ref(0)
+    const display = ref(false)
     const quizList = ref<Quiz[]>([])
-
 
     const makeQuizList = () => {
       quizList.value = [];
@@ -95,6 +74,7 @@ export default {
       quizLevelList,
       quizList,
       makeQuizList,
+      display,
     }
   }
 }
@@ -107,11 +87,18 @@ export default {
   &__head {
     margin-bottom: 30px;
   }
+  &__body {
+    & > div {
+      margin-bottom: 10px;
+    }
+  }
   &__bottom {
     display: flex;
     flex-wrap: wrap;
-  }
-  @include pc() {
+    font-size: 12px;
+    @include pc() {
+      font-size: 16px;
+    }
   }
 }
 .p-form-container {
@@ -126,11 +113,6 @@ export default {
   margin-right: 10px;
   margin-bottom: 8px;
 }
-.c-sub-title {
-  font-size: 20px;
-  display: block;
-  width: 100%;
-}
 .c-select {
   padding: 5px 10px;
   box-sizing: border-box;
@@ -139,5 +121,42 @@ export default {
   border-radius: 5px;
   font-size: 16px;
   width: 100%;
+}
+
+// クイズ
+.c-quiz {
+  font-size: 13px;
+  display: flex;
+  @include pc() {
+    font-size: 16px;
+  }
+  &__label {
+    display: inline-block;
+    width: 30px;
+  }
+  &__body {
+    @include pc() {
+      display: inline;
+      width: auto;
+    }
+    > span {
+      margin-right: 18px;
+    }
+    > span:last-child {
+      margin-right: 0px;
+    }
+  }
+}
+// 答え
+.answer {
+  &--display {
+    opacity: 1;
+    transition: all .5s;
+  }
+  &--hidden {
+    opacity: 0;
+    transition: all .5s;
+  }
+
 }
 </style>
