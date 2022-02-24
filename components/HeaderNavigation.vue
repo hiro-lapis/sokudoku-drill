@@ -12,6 +12,9 @@
           <li class="c-nav__list">
             <NuxtLink to="/block-pattern">ブロックパターン</NuxtLink>
           </li>
+          <li class="c-nav__list">
+            <NuxtLink to="/abc-logic">ABCロジック</NuxtLink>
+          </li>
         </ul>
       </nav>
     </div>
