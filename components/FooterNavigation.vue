@@ -51,7 +51,6 @@ export default {
        pcSize,
      }
    }
-
 }
 
 </script>
@@ -108,6 +107,7 @@ export default {
         }
     }
 }
+// 回答文字のスライドフェードインアニメーション
 @keyframes slide-in {
 	20% {
 		opacity: 0;
