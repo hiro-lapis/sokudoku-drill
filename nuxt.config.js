@@ -17,8 +17,8 @@ export default defineNuxtConfig({
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      // FontAwesome
-      { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.8.2/css/all.css' },
+      // FontAwesome(CDN)
+      // { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.8.2/css/all.css' },
     ],
   },
 
@@ -46,7 +46,15 @@ export default defineNuxtConfig({
     // '@nuxt/typescript-build',
     // Simple usage
     '@nuxtjs/eslint-module',
+    '@nuxtjs/fontawesome',
   ],
+  // https://www.npmjs.com/package/@nuxtjs/fontawesome
+  // https://fontawesome.com/icons
+  fontawesome: {
+    icons: {
+      solid: ['faArrowRight', 'faDoorOpen', 'faSlidersH', 'faCubes', ],
+    }
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [],
