@@ -14,5 +14,7 @@ describe('FooterNavigation', () => {
     const links = wrapper.findAll(RouterLinkStub)
     // 各リンクテキストのチェック
     expect(links.at(0).text()).toBe('スライドワード')
+    expect(links.at(1).text()).toBe('ブロックパターン')
+    expect(links.at(2).text()).toBe('ABCロジック')
   })
 })
