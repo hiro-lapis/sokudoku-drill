@@ -18,5 +18,4 @@ module.exports = {
   testEnvironment: 'jsdom',
   // テスト対象から除外
   testPathIgnorePatterns: ["/node_modules/", '.idea'],
-  // setupFiles: ['./setup.js'],
 }
