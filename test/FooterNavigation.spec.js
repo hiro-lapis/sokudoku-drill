@@ -4,7 +4,6 @@ import FooterNavigation from '@/components/FooterNavigation.vue'
 describe('FooterNavigation', () => {
   test('is a Vue instance', () => {
     const wrapper = mount(FooterNavigation, {
-      shallow: true,
       stubs: {
         NuxtLink: RouterLinkStub,
         'font-awesome-icon': { template: '<i></i>' }
