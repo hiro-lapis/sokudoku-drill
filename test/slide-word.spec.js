@@ -1,23 +1,23 @@
-import { mount } from '@vue/test-utils'
+import { mount, shallowMount } from '@vue/test-utils'
 import SlideWord from '@/pages/slide-word.vue'
+import PageTitle from '@/components/PageTitle.vue'
+import SubmitButton from '@/components/SubmitButton.vue'
+import Vue from 'vue'
+import CompositionApi from '@vue/composition-api'
+
+Vue.use(CompositionApi)
 
 describe('SlideWord', () => {
   it("ページタイトルが正しいか", () => {
-    const wrapper = mount(SlideWord)
-
+    const wrapper = shallowMount(SlideWord, {
+      stubs: {
+        PageTitle: PageTitle,
+        SubmitButton: SubmitButton,
+      }
+    })
     wrapper.get("input").setValue(10);
     const title = wrapper.find('.c-title')
 
     expect(title.text()).toBe('スライドワード')
   })
-
-  // it("input count and click change button", async () => {
-  // // test('is a Vue instance', () => {
-  //   const wrapper = mount(SlideWord)
-
-  //   wrapper.get("input").setValue(10);
-
-  //   await wrapper.get("button").trigger("click");
-  //   expect(title.text()).toBe('スライドワード')
-  // })
 })
