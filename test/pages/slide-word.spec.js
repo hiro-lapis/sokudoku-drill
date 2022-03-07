@@ -17,7 +17,6 @@ describe('SlideWord', () => {
     })
     wrapper.get("input").setValue(10);
     const title = wrapper.find('.c-title')
-
     expect(title.text()).toBe('スライドワード')
   })
 })
