@@ -46,7 +46,7 @@ jobs:
         run: yarn
 
       - name: Generate nuxi files 👨🏻‍💻
-        run: yarn dev
+        run: yarn build
 
       - name: Run tests 🧪
         run: yarn test
