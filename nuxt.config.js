@@ -1,6 +1,9 @@
 import { defineNuxtConfig } from '@nuxt/bridge'
 
 export default defineNuxtConfig({
+  bridge: {
+    nitro: process.env.NODE_ENV !== 'production',
+  },
   target: 'static',
   ssr: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
