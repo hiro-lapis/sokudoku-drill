@@ -6,7 +6,7 @@
     "dev": "nuxi dev",
     "build": "nuxi build",
     "start": "node .output/server/index.mjs",
-    "generate": "nuxt generate",
+    "generate": "nuxi generate",
     "test": "jest",
     "lint": "yarn lint:js && yarn lint:style && yarn lint:prettier",
     "lint:js": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
