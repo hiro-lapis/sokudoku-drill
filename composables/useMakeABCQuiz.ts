@@ -1,4 +1,4 @@
-import Quiz from '../modules/Quiz'
+import Quiz from '../types/Quiz'
 import common from '@/plugins/common'
 
 /**
