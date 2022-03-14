@@ -47,7 +47,7 @@
 import { onMounted,ref } from '@vue/composition-api';
 import { useGetQuizFlag } from '~/composables/useGetQuizFlag';
 import { useMakeABCQuiz } from '~/composables/useMakeABCQuiz';
-import Quiz from '~/modules/Quiz';
+import Quiz from '~/types/Quiz';
 
 const quizCount = 30;
 const quizLevelList = [

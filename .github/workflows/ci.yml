@@ -45,5 +45,8 @@ jobs:
       - name: Install dependencies 👨🏻‍💻
         run: yarn
 
+      - name: Generate nuxi files 👨🏻‍💻
+        run: yarn generate
+
       - name: Run tests 🧪
         run: yarn test
