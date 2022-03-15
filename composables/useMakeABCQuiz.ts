@@ -62,17 +62,17 @@ export const useMakeABCQuiz = (worstFlag: boolean, unclearFlag: boolean): Quiz =
     )
   }
 
-  /** ふつう(最上・最下を問い回答が明確)なクイズを作成 */
-  // const makeNormalQuiz = (list: string[]): Quiz => {
-  //   // 回答を最初の要素に設定(答えが最下を問うものでも共通)
-  //   const answer = list[0]
-  //   // ヒント問いで使用する比較表現
-  //   const expression =  expressionList[common.getRandomInt(expressionList.length)]
-  //   // 最上・最下どちらを問うクイズかを決める
-  //   const standardIsHigh = common.getRandomBool()
-  //   const question = '一番'+ (standardIsHigh ? expression.high : expression.low) + 'のは?'
-  //   TODO:
-  //   TODO: クイズの最上を問う時はkeyが高い
+  /** ふつう(最下を問い回答が明確)なクイズを作成 */
+  const makeNormalQuiz = (list: string[]): Quiz => {
+    // 回答を最初の要素に設定(答えが最下を問うものでも共通)
+    // key[2]が最下位
+    const answer = list[2]
+    // ヒント問いで使用する比較表現
+    const expression =  expressionList[common.getRandomInt(expressionList.length)]
+    // 最下を問う文章を設定
+    const question = '一番'+ expression.low + 'のは?'
+    // ヒント文で上位比較ワードを使用するかどうかのフラグ
+    let isHighExp = common.getRandomBool()
   /**
    * TODO:比較ロジック実装
    * 必ず答えを出すためのヒント文生成
@@ -80,9 +80,9 @@ export const useMakeABCQuiz = (worstFlag: boolean, unclearFlag: boolean): Quiz =
    * 最上を問うクイズの時はlistのkey値が高い方が高い
    * 最下を問うクイズの時はlistのkey値が高い方が低い
    */
-  // }
-  /** むずかしい(最上・最下を問い回答が明確)なクイズを作成 */
-  // const makeHardQuiz = (list: string[]): Quiz => {
+  }
+  /** むずかしい(最上・最下を問い回答が不明確)なクイズを作成 */
+  // const makeHardQuiz = (list: string[], worstFlag): Quiz => {
   // }
 
   // console.log(worstFlag)
@@ -92,9 +92,9 @@ export const useMakeABCQuiz = (worstFlag: boolean, unclearFlag: boolean): Quiz =
   if (!unclearFlag && !worstFlag) {
     return makeEasyQuiz(getElementList());
   }
-  // if (unclearFlag && !worstFlag) {
-  //   return makeNormalQuiz(getElementList());
-  // }
+  if (unclearFlag && !worstFlag) {
+    return makeNormalQuiz(getElementList());
+  }
   // if (unclearFlag && worstFlag) {
   //   return makeHardQuiz(getElementList());
   // }
