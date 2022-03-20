@@ -66,7 +66,7 @@ export default {
     const makeQuizList = () => {
       quizList.value = [];
       for (let index = 0; index < quizCount; index++) {
-        const { worstFlag, unclearFlag } = useGetQuizFlag(quizLevel.value);
+        const { worstFlag, unclearFlag } = useGetQuizFlag(quizLevel.value)
         quizList.value.push(useMakeABCQuiz(worstFlag, unclearFlag))
       }
     }
