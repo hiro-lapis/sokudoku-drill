@@ -6,10 +6,11 @@
       </div>
       <div class="p-form-container">
         <div class="p-form-container__input">
-          <select v-model="quizLevelList" class="c-select">
+          <select v-model="quizLevel" class="c-select">
           <option
                 v-for="(item, index) in quizLevelList"
                 :key="index"
+                :selected="index === quizLevel"
                 :value="item.key">{{item.name}}</option>
           </select>
         </div>
@@ -65,13 +66,14 @@ export default {
     const makeQuizList = () => {
       quizList.value = [];
       for (let index = 0; index < quizCount; index++) {
-        const { worstFlag, unclearFlag } = useGetQuizFlag(quizLevel.value);
+        const { worstFlag, unclearFlag } = useGetQuizFlag(quizLevel.value)
         quizList.value.push(useMakeABCQuiz(worstFlag, unclearFlag))
       }
     }
     onMounted(makeQuizList)
     return {
       quizLevelList,
+      quizLevel,
       quizList,
       makeQuizList,
       display,
