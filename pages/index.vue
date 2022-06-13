@@ -5,6 +5,16 @@
       <div class="p-hero-banner">
       <!-- ロジックテストなどのコンテンツへのリンクを列で表示 -->
       <!-- ホバー時にアニメーション -->
+      <div class="c-slider">
+        <i class="c-slider__left-arrow">＜</i>
+        <i class="c-slider__right-arrow">＞</i>
+        <ul>
+          <li>IMG1</li>
+          <li>IMG2</li>
+          <li>IMG3</li>
+        </ul>
+
+      </div>
       </div>
     </section>
     <!-- トライアルリンク -->
@@ -65,5 +75,36 @@
 import Vue from 'vue'
 export default Vue.extend({
   name: 'IndexPage',
+  setup() {
+
+  }
 })
 </script>
+
+<style lang="scss" scoped>
+.c-slider {
+  width: 980px;
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+  &__container {
+    padding: 0;
+    overflow: hidden;
+    margin: 0;
+    list-style: none;
+    position: relative;
+  }
+  &__item {
+    width: 980px;
+    width: 400px;
+    background: #333;
+    color: #fff;
+    float: left;
+    text-align: center;
+    line-height: 400px;
+    font-size: 16px;
+  }
+}
+
+
+</style>
